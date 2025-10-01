@@ -1,158 +1,278 @@
-# PowerMate
-### Proyecto Didáctico: Sistema de Gestión de Energía para Hogares Inteligentes
+# 🔌 PowerMate
+### Sistema de Gestión de Energía para Hogares Inteligentes
 
-### EQUIPO 1: 
-* PRODUCT OWNER: Andrés Vázquez [Github](https://github.com/andresvaz89)
-* SCRUM MASTER: Roberto Lumbreras [Github](https://github.com/roberto-lumbreras)
-* DEVELOPER: Maria García [Github](https://github.com/strawmery)
-* DEVELOPER: Abel Prieto [Github](https://github.com/abelpriem)
-* DEVELOPER: Naudelyn Lucena [Github](https://github.com/NaudelynLucena)
-* DEVELOPER: Pilar Pato [Github](https://github.com/Pilar-Pato)
-* DEVELOPER: Lara Gutiérrez [Github](https://github.com/lara-gs)
-* DEVELOPER: Ana Hernández [Github](https://github.com/AnaBHernandez)
-* DEVELOPER: Susana Artime [Github](https://github.com/Susana-Artime)
-* DEVELOPER: Rubén Blanco [Github](https://github.com/Ruben-BV)
+[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.java.net/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)](https://www.mysql.com/)
+[![Maven](https://img.shields.io/badge/Maven-3.8+-red.svg)](https://maven.apache.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-### EQUIPO 2: 
-* PRODUCT OWNER: Acacia Sánchez Pastur [Github](https://github.com/Acacia-Sanchez)
-* SCRUM MASTER: Juan Camilo [Github](https://github.com/Juanito2005)
-* DEVELOPER: Adrian Caiñas [Github](https://github.com/acr00)
-* DEVELOPER: Andrea Martinez [Github](https://github.com/andreamsgi27)
-* DEVELOPER: Óscar Menéndez [Github](https://github.com/Morty1904)
-* DEVELOPER: Mercy Chancayauri [Github](https://github.com/mercyluz)
-* DEVELOPER: Alejandra Sierra [Github](https://github.com/alejandra-sierra)
-* DEVELOPER: Estefany Ochoa [Github](https://github.com/EstefanyOchoaRomero)
-* DEVELOPER: Kevin Boy [Github](https://github.com/sealkboy)
-* DEVELOPER: Guadalupe G.Figeroa [Github](https://github.com/GuadalupeGFigueroa)
+## 📋 Tabla de Contenidos
+- [Descripción del Proyecto](#-descripción-del-proyecto)
+- [Características Principales](#-características-principales)
+- [Tecnologías Utilizadas](#-tecnologías-utilizadas)
+- [Arquitectura del Sistema](#-arquitectura-del-sistema)
+- [Instalación y Configuración](#-instalación-y-configuración)
+- [API Endpoints](#-api-endpoints)
+- [Testing](#-testing)
+- [Equipos de Desarrollo](#-equipos-de-desarrollo)
+- [Contribución](#-contribución)
 
-## 1. Objetivos del Proyecto
-¿Cómo podríamos diseñar un sistema que ayude a las personas a ahorrar energía y controlar sus dispositivos desde cualquier lugar?
+## 🎯 Descripción del Proyecto
 
-El proyecto consiste en crear un backend que permita a los usuarios:
-* Monitorear el consumo energético de dispositivos inteligentes en su hogar.
-* Configurar alertas y programar horarios para optimizar el uso de energía.
-* Visualizar reportes históricos para tomar mejores decisiones sobre su consumo.
+PowerMate es un sistema backend desarrollado en Spring Boot que permite a los usuarios gestionar y monitorear el consumo energético de dispositivos inteligentes en sus hogares. El sistema facilita el ahorro de energía mediante el control remoto, programación automática y alertas personalizadas.
 
-### Entregables y flujo de trabajo.
-* Definir los roles del equipo (en cada equipo)
-* Se debe usar Jira para gestión del proyecto.
-* Se debe hacer normalización, ER y UML.
-* Repositorio:
-    * Se debe trabajar en un único repositorio.
-    * Todas las ramas tiene que seguir un flujo de PR y ser aprobadas por una persona de tu mismo grupo que será así mismo el encargo de: mergear y borrar esa rama (una vez aprobada la PR)
-    * NO se trabaja en main.
-    * TODAS las ramas salen de dev.
-    * El naming debe ser coherente (NO spanglish) y seguir un formato acorde al ticket de jira al que se corresponde la tarea. Ejemplo, si el proyecto toma como Key SGE (Sistema de Gestión de Energía) los commit se verían así: feat(SGE-X):Commit-inicial”
-        * feat o fix (según lo que vayamos a hacer, desarrollar una feature o bien hacer un “arreglo” de una existente)
-        * (SGE-X) donde X es el número del ticket (jira) al que se corresponde esa tarea.
-        * descripción de lo que se hará en esa tarea/rama
-    * Al ser dos equipos de una misma empresa y estar limitado jira a 10 usuarios en su versión gratuita. La sugerencia es que uséis el mismo KEY, SGE (Sistema de Gestión de Energía) pero el equipo 1 terminado en 1 y el 2, terminado en 2: SGE1, SGE2.
-    * Debe usar MySQLWorkbench como bbdd.
-    * Debemos usar Postman para testear los endpoints.
-    * Cobertura de testing mínima esperada 60%.
-    * Se puede investigar LIBREMENTE cualquier otra herramienta que los equipos acuerden probar y/o investigar (si os facilita el trabajo o causa curiosidad)
+### Objetivos Principales
+- 🏠 **Gestión de Dispositivos**: Control completo de dispositivos inteligentes
+- 📊 **Monitoreo en Tiempo Real**: Seguimiento del consumo energético
+- ⏰ **Programación Automática**: Horarios de encendido/apagado
+- 🚨 **Sistema de Alertas**: Notificaciones por umbrales de consumo
+- 📈 **Reportes Históricos**: Análisis de patrones de consumo
 
-## Equipo 1: Usuarios y Dispositivos
-* Paso 1: Configuración de Autenticación Básica y Roles
-    * Entender la necesidad:
-        * Crear un sistema donde los usuarios puedan registrarse, iniciar sesión y tener acceso según su rol (usuario o administrador).
-        * Investigar cómo usar Spring Security para implementar autenticación básica.
-    * Objetivos:
-        * Crear una tabla en la base de datos para almacenar usuarios con campos como:
-            * id, username, password (encriptado) y role.
-        * Configurar una clase de seguridad que permita:
-            * Acceso a ciertos endpoints solo para administradores.
-            * Acceso general para usuarios autenticados.
-    * Tareas:
-        * Diseñar el modelo de datos para users y su repositorio.
-        * Investigar cómo encriptar contraseñas y verificar autenticación.
-        * Configurar roles en la lógica de autorización (pueden investigar el uso de filtros o anotaciones como @PreAuthorize).
+## ✨ Características Principales
 
-* Paso 2: Configuración de CORS
-    * Entender la necesidad:
-        * Permitir que el sistema backend acepte solicitudes desde dominios específicos (como el frontend o herramientas como Postman).
-    * Objetivos:
-        * Investigar cómo configurar CORS en Spring Boot para:
-            * Permitir métodos HTTP como GET, POST, PUT y DELETE.
-            * Asegurar que solo dominios confiables puedan realizar solicitudes.
-    * Tareas:
-        * Implementar una configuración de CORS global.
-        * Probar con herramientas como Postman para asegurarse de que funciona correctamente.
+### 🔐 Autenticación y Seguridad
+- Autenticación básica con Spring Security
+- Encriptación de contraseñas con BCrypt
+- Control de acceso por roles (ADMIN/USER)
+- Configuración CORS para integración frontend
 
-* Paso 3: CRUD de Dispositivos
-    * Entender la necesidad:
-        * Permitir que los usuarios gestionen sus dispositivos inteligentes (crear, ver, editar y eliminar).
-    * Objetivos:
-        * Diseñar un modelo de datos para devices relacionado con los usuarios.
-        * Asegurarse de que un usuario solo pueda ver y gestionar sus propios dispositivos.
-    * Tareas:
-        * Diseñar el esquema de la tabla devices.
-        * Crear las relaciones necesarias entre users y devices.
-        * Implementar endpoints para:
-            * Listar dispositivos del usuario autenticado.
-            * Crear un nuevo dispositivo con validación de datos.
-            * Actualizar la información de un dispositivo.
-            * Eliminar un dispositivo.
+### 🏠 Gestión de Dispositivos
+- CRUD completo de dispositivos inteligentes
+- Asociación de dispositivos a usuarios
+- Control de estado (encendido/apagado)
+- Gestión de potencia y consumo
 
+### 📊 Monitoreo de Consumo
+- Registro automático de consumo energético
+- Historial temporal de datos
+- Cálculo de consumo por dispositivo
+- Métricas en tiempo real
 
-## Equipo 2: Consumo y Optimización
-* Paso 1: Monitoreo de Consumo en Tiempo Real
-    * Entender la necesidad:
-        * Mostrar a los usuarios cuánto están consumiendo sus dispositivos en tiempo real y registrar este consumo para generar reportes.
-    * Objetivos:
-        * Diseñar un modelo de datos para almacenar registros de consumo, incluyendo:
-            * device_id, timestamp, y consumption.
-        * Implementar lógica para simular el consumo energético a intervalos regulares.
-    * Tareas:
-        * Diseñar el esquema de la tabla consumption_records.
-        * Crear un servicio para generar datos de consumo simulados.
-        * Implementar endpoints para:
-            * Obtener el consumo actual de un dispositivo.
-            * Registrar consumos periódicos en la base de datos.
+### ⏰ Programación Inteligente
+- Configuración de horarios automáticos
+- Encendido/apagado programado
+- Gestión de múltiples horarios por dispositivo
+- Validación de conflictos de horarios
 
-* Paso 2: Alertas de Consumo
-    * Entender la necesidad:
-        * Notificar a los usuarios cuando el consumo supere un límite establecido por ellos mismos.
-    * Objetivos:
-        * Diseñar un modelo de datos para almacenar configuraciones de alertas, incluyendo:
-            * user_id, threshold, y device_id (opcional, para alertas por dispositivo).
-        * Implementar lógica para comparar el consumo con los umbrales configurados.
-    * Tareas:
-        * Diseñar el esquema de la tabla alerts.
-        * Crear endpoints para:
-            * Configurar alertas (crear, editar y eliminar).
-            * Comprobar si alguna alerta está activa.
-        * Proponer un método para notificar (puede ser una simulación en el log o una respuesta API).
+### 🚨 Sistema de Alertas
+- Configuración de umbrales personalizados
+- Notificaciones por consumo excesivo
+- Alertas por dispositivo específico
+- Historial de alertas generadas
 
-* Paso 3: Programación de Dispositivos
-    * Entender la necesidad:
-        * Automatizar el encendido y apagado de dispositivos en horarios específicos.
-    * Objetivos:
-        * Diseñar un modelo de datos para almacenar horarios de encendido/apagado.
-        * Implementar lógica para ejecutar las acciones programadas.
-    * Tareas:
-        * Diseñar el esquema de la tabla schedules.
-        * Crear un servicio que compruebe si un dispositivo debe estar encendido o apagado.
-        * Implementar endpoints para:
-            * Configurar horarios (crear, editar y eliminar).
-            * Consultar horarios activos para un dispositivo.
+## 🛠 Tecnologías Utilizadas
 
+### Backend
+- **Java 21** - Lenguaje de programación
+- **Spring Boot 3.4.0** - Framework principal
+- **Spring Security** - Autenticación y autorización
+- **Spring Data JPA** - Persistencia de datos
+- **Hibernate** - ORM
 
-## 3. Arquitectura del Sistema (Visual y Práctica)
-* Diagrama General
-    * Backend: Lógica de negocio y gestión de usuarios/dispositivos.
-    * Base de Datos (MySQL): Tablas para almacenar usuarios, dispositivos y consumo.
-    * API REST:
-        * /api/users: Usuarios y autenticación.
-        * /api/devices: Gestión de dispositivos.
-        * /api/consumption: Consumo en tiempo real.
-        * /api/alerts: Gestión de alertas.
-        * /api/schedule: Programación de dispositivos
-<<<<<<< HEAD
- 
-"# PowerMate" 
-=======
+### Base de Datos
+- **MySQL 8.0** - Base de datos relacional
+- **JPA/Hibernate** - Mapeo objeto-relacional
 
-## 4. DIAGRAMA UML
-![image](https://github.com/user-attachments/assets/0e467b9f-7513-4928-8910-c791f062a3c2)
->>>>>>> 3871e79ad60a26e6863a4582e982de9ce723c9bd
+### Testing
+- **JUnit 5** - Framework de testing
+- **Mockito** - Mocking framework
+- **Spring Boot Test** - Testing de integración
+
+### Herramientas de Desarrollo
+- **Maven** - Gestión de dependencias
+- **Lombok** - Reducción de código boilerplate
+- **Jackson** - Serialización JSON
+- **MySQL Workbench** - Gestión de base de datos
+
+## 🏗 Arquitectura del Sistema
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Controllers   │    │    Services     │    │  Repositories  │
+│                 │    │                 │    │                 │
+│ • UserController│◄──►│ • UserService   │◄──►│ • UserRepository│
+│ • DeviceController│   │ • DeviceService │    │ • DeviceRepository│
+│ • AlertsController│   │ • AlertsService │    │ • AlertRepository│
+│ • ScheduleController│ │ • ScheduleService│   │ • ScheduleRepository│
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│      DTOs       │    │     Models      │    │   Database      │
+│                 │    │                 │    │                 │
+│ • UserDTO       │    │ • User          │    │ • users         │
+│ • DeviceDTO     │    │ • Device        │    │ • devices       │
+│ • AlertsDTO     │    │ • Alerts        │    │ • alerts        │
+│ • ScheduleDTO   │    │ • Schedule      │    │ • schedules     │
+│ • ConsRecordDTO │    │ • ConsRecord    │    │ • consumption_records│
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+## 🚀 Instalación y Configuración
+
+### Prerrequisitos
+- Java 21 o superior
+- Maven 3.8+
+- MySQL 8.0
+- Git
+
+### Pasos de Instalación
+
+1. **Clonar el repositorio**
+```bash
+git clone https://github.com/tu-usuario/powermate.git
+cd powermate
+```
+
+2. **Configurar la base de datos**
+```sql
+CREATE DATABASE testdb;
+```
+
+3. **Configurar variables de entorno**
+```properties
+# Editar src/main/resources/application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/testdb?createDatabaseIfNotExist=true
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseña
+```
+
+4. **Instalar dependencias**
+```bash
+mvn clean install
+```
+
+5. **Ejecutar la aplicación**
+```bash
+mvn spring-boot:run
+```
+
+La aplicación estará disponible en `http://localhost:8080`
+
+## 📡 API Endpoints
+
+### Autenticación
+```
+POST /api/admin/register    - Registrar nuevo usuario
+```
+
+### Usuarios
+```
+GET    /api/users           - Listar usuarios
+PUT    /api/admin/users/{id} - Actualizar usuario
+DELETE /api/admin/users/{id} - Eliminar usuario
+```
+
+### Dispositivos
+```
+GET    /api/devices         - Listar dispositivos
+POST   /api/devices         - Crear dispositivo
+GET    /api/devices/{id}    - Obtener dispositivo
+PUT    /api/devices/{id}    - Actualizar dispositivo
+DELETE /api/devices/{id}    - Eliminar dispositivo
+PUT    /api/devices/{id}/status - Cambiar estado
+```
+
+### Consumo
+```
+GET    /api/consumption     - Obtener registros de consumo
+POST   /api/consumption     - Registrar consumo
+GET    /api/consumption/{deviceId} - Consumo por dispositivo
+```
+
+### Alertas
+```
+GET    /api/alerts          - Listar alertas
+POST   /api/alerts          - Crear alerta
+PUT    /api/alerts/{id}     - Actualizar alerta
+DELETE /api/alerts/{id}     - Eliminar alerta
+```
+
+### Programación
+```
+GET    /api/schedules       - Listar horarios
+POST   /api/schedules       - Crear horario
+PUT    /api/schedules/{id}  - Actualizar horario
+DELETE /api/schedules/{id}  - Eliminar horario
+```
+
+## 🧪 Testing
+
+### Ejecutar Tests
+```bash
+# Ejecutar todos los tests
+mvn test
+
+# Ejecutar tests con cobertura
+mvn test jacoco:report
+```
+
+### Cobertura de Testing
+- **Cobertura mínima**: 60%
+- **Tests unitarios**: Controllers, Services, Models
+- **Frameworks**: JUnit 5, Mockito, Spring Boot Test
+
+## 👥 Equipos de Desarrollo
+
+### EQUIPO 1: Usuarios y Dispositivos
+* **PRODUCT OWNER**: Andrés Vázquez [Github](https://github.com/andresvaz89)
+* **SCRUM MASTER**: Roberto Lumbreras [Github](https://github.com/roberto-lumbreras)
+* **DEVELOPERS**: 
+  - Maria García [Github](https://github.com/strawmery)
+  - Abel Prieto [Github](https://github.com/abelpriem)
+  - Naudelyn Lucena [Github](https://github.com/NaudelynLucena)
+  - Pilar Pato [Github](https://github.com/Pilar-Pato)
+  - Lara Gutiérrez [Github](https://github.com/lara-gs)
+  - Ana Hernández [Github](https://github.com/AnaBHernandez)
+  - Susana Artime [Github](https://github.com/Susana-Artime)
+  - Rubén Blanco [Github](https://github.com/Ruben-BV)
+
+### EQUIPO 2: Consumo y Optimización
+* **PRODUCT OWNER**: Acacia Sánchez Pastur [Github](https://github.com/Acacia-Sanchez)
+* **SCRUM MASTER**: Juan Camilo [Github](https://github.com/Juanito2005)
+* **DEVELOPERS**:
+  - Adrian Caiñas [Github](https://github.com/acr00)
+  - Andrea Martinez [Github](https://github.com/andreamsgi27)
+  - Óscar Menéndez [Github](https://github.com/Morty1904)
+  - Mercy Chancayauri [Github](https://github.com/mercyluz)
+  - Alejandra Sierra [Github](https://github.com/alejandra-sierra)
+  - Estefany Ochoa [Github](https://github.com/EstefanyOchoaRomero)
+  - Kevin Boy [Github](https://github.com/sealkboy)
+  - Guadalupe G.Figeroa [Github](https://github.com/GuadalupeGFigueroa)
+
+## 🤝 Contribución
+
+### Flujo de Trabajo
+1. Fork del repositorio
+2. Crear rama feature desde `dev`: `git checkout -b feat/SGE1-XX:descripcion`
+3. Realizar cambios y commits descriptivos
+4. Crear Pull Request hacia `dev`
+5. Revisión y aprobación por otro miembro del equipo
+6. Merge y eliminación de la rama
+
+### Convenciones de Commits
+```
+feat(SGE1-XX): Agregar nueva funcionalidad
+fix(SGE1-XX): Corregir bug existente
+docs(SGE1-XX): Actualizar documentación
+test(SGE1-XX): Agregar o modificar tests
+```
+
+### Estándares de Código
+- Cobertura de testing mínima: 60%
+- Uso de Postman para testing de endpoints
+- Documentación actualizada en cada PR
+- Código limpio y comentarios descriptivos
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 📞 Contacto
+
+Para preguntas o sugerencias sobre el proyecto, contacta con el equipo de desarrollo a través de los enlaces de GitHub proporcionados arriba.
+
+---
+
+**Desarrollado con ❤️ por los equipos de Factoria F5**
